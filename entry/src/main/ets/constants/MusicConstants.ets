@@ -26,37 +26,37 @@ export const tabsData: TabClass[] = [
 }]
 // 轮播图数据
 export const swiperList: string[] = [
-  "https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/banner1.png",
-  "https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/banner2.png",
-  "https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/banner3.png",
-  "https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/banner4.png",
-  "https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/banner5.png"
+  "https://cdn.atstudy.com/lab-d3/harmonyOS/music/banner1.png",
+  "https://cdn.atstudy.com/lab-d3/harmonyOS/music/banner2.png",
+  "https://cdn.atstudy.com/lab-d3/harmonyOS/music/banner3.png",
+  "https://cdn.atstudy.com/lab-d3/harmonyOS/music/banner4.png",
+  "https://cdn.atstudy.com/lab-d3/harmonyOS/music/banner5.png"
 ]
 // 每日推荐数据
 export const dailyRecommend: recommendDailyType[] = [
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/recommend1.png',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/recommend1.png',
     title: '每日推荐 | 今天从《不得不爱》听起 | 私人雷达',
     type: '每日推荐',
     top: '#660000',
     bottom: '#382e2f'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/recommend2.png',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/recommend2.png',
     title: '从 [Nothing on Me] 开启无限漫游',
     type: '私人漫游',
     top: '#382e2f',
     bottom: '#a37862'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/recommend3.png',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/recommend3.png',
     title: '每日推荐 | 今天从《不得不爱》听起 | 私人雷达',
     type: '华语流行',
     top: '#a37862',
     bottom: '#174847'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/recommend4.png',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/recommend4.png',
     title: '每日推荐 | 今天从《不得不爱》听起 | 私人雷达',
     type: '私人雷达',
     top: '#174847',
@@ -66,27 +66,27 @@ export const dailyRecommend: recommendDailyType[] = [
 // 推荐歌单数据
 export const recommendList: recommendListType[] = [
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/list1.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/list1.jpg',
     title: '每日推荐 | 今天从《不得不爱》听起 | 私人雷达',
     count: '270.9万'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/list2.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/list2.jpg',
     title: 'Yasuo和更多好听的 | 华语私人雷达 | 回忆8090',
     count: '476.1万'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/list3.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/list3.jpg',
     title: 'Trap Remix丨当欧美热单遇上毒性低音',
     count: '186.3万'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/list4.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/list4.jpg',
     title: '满级人类进化之路必备BGM | 根本停不下来',
     count: '186.3万'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/list5.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/list5.jpg',
     title: '认真去聆听这个世界的每一分每一秒 (强烈推荐)',
     count: '362.8万'
   },
@@ -96,116 +96,116 @@ export const recommendList: recommendListType[] = [
 // 歌曲列表
 export const songs: songItemType[] = [
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/0.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/0.jpg',
     name: '直到世界的尽头',
     author: 'WANDS',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/0.m4a',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/0.m4a',
     id: '0000'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/1.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/1.jpg',
     name: '画',
     author: '赵磊',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/1.mp3',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/1.mp3',
     id: '0001'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/2.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/2.jpg',
     name: 'Sweet Dreams',
     author: 'TPaul Sax / Eurythmics',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/2.mp3',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/2.mp3',
     id: '0002'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/3.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/3.jpg',
     name: '奢香夫人',
     author: '凤凰传奇',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/3.m4a',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/3.m4a',
     id: '0003'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/4.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/4.jpg',
     name: '空心',
     author: '光泽',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/4.mp3',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/4.mp3',
     id: '0004'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/5.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/5.jpg',
     name: '反转地球',
     author: '潘玮柏',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/5.mp3',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/5.mp3',
     id: '0005'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/6.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/6.jpg',
     name: 'No.9',
     author: 'T-ara',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/6.m4a',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/6.m4a',
     id: '0006'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/7.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/7.jpg',
     name: '孤独',
     author: 'G.E.M.邓紫棋',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/7.m4a',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/7.m4a',
     id: '0007'
   },
 
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/8.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/8.jpg',
     name: 'Lose Control',
     author: 'Hedley',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/8.m4a',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/8.m4a',
     id: '0008'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/9.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/9.jpg',
     name: '倩女幽魂',
     author: '张国荣',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/9.m4a',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/9.m4a',
     id: '0009'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/10.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/10.jpg',
     name: '北京北京',
     author: '汪峰',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/10.m4a',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/10.m4a',
     id: '0010'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/11.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/11.jpg',
     name: '苦笑',
     author: '汪苏泷',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/11.mp3',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/11.mp3',
     id: '0011'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/12.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/12.jpg',
     name: '一生所爱',
     author: '卢冠廷 / 莫文蔚',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/12.m4a',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/12.m4a',
     id: '0012'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/13.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/13.jpg',
     name: '月半小夜曲',
     author: '李克勤',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/13.mp3',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/13.mp3',
     id: '0013'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/14.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/14.jpg',
     name: 'Rolling in the Deep',
     author: 'Adele',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/14.m4a',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/14.m4a',
     id: '0014'
   },
   {
-    img: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/15.jpg',
+    img: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/15.jpg',
     name: '海阔天空',
     author: 'Beyond',
-    url: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/15.m4a',
+    url: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/15.m4a',
     id: '0015'
   }
 ]
@@ -220,7 +220,7 @@ export const favoriteList: favoriteListType = {
 export const momentList: momentListType[] = [
   {
     author: 'Feast-aws',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h0.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h0.jpg',
     content: '二十几岁的你，一无所有，也拥有一切！',
     comment: 604,
     like: 23382,
@@ -228,7 +228,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: 'CeeYet',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h1.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h1.jpg',
     content: '画一个姑娘陪着我,再画一个姑娘陪着我',
     comment: 1237,
     like: 5482,
@@ -236,7 +236,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: 'Z_HOUSC',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h2.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h2.jpg',
     content: '这个事还得从两个职业选手说起',
     comment: 8425,
     like: 4234,
@@ -244,7 +244,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '逆转大师',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h3.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h3.jpg',
     content: '听奢香夫人，做上岸女人！',
     comment: 7658,
     like: 11545,
@@ -252,7 +252,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: 'Moriaty',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h4.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h4.jpg',
     content: '别一厢情愿的付出，他如果拒绝你了就别再纠缠了，别一次次满满热情得到的都是敷衍冷淡的回复，你不该这样的，你应该酷一点，别打扰真的是最好的选择。',
     comment: 543,
     like: 2234,
@@ -260,7 +260,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '丶你要去哪里',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h5.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h5.jpg',
     content: '当年会一段潘帅的RAP是很拉风的事情',
     comment: 14415,
     like: 36297,
@@ -268,7 +268,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '一个人的某泥',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h6.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h6.jpg',
     content: '抗韩二十年，死于朴智妍',
     comment: 1237,
     like: 5482,
@@ -276,7 +276,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '曾经那个少年1993',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h7.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h7.jpg',
     content: '一个人去游泳，像投河；倒过来，一个人去投河，像游泳，太孤独。 ———-陈小三',
     comment: 7628,
     like: 36448,
@@ -284,7 +284,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '柳崽崽阿',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h8.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h8.jpg',
     content: '哎呦，B站来的跟我一起摇💃',
     comment: 1237,
     like: 5482,
@@ -292,7 +292,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '李富贵他哥',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h9.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h9.jpg',
     content: '我弟弟老是偷我的裙子丝袜穿，我担心他在女装的道路上越走越远，这让我这个当哥哥的很是担心啊',
     comment: 7362,
     like: 11482,
@@ -300,7 +300,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '一檀溪一',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h10.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h10.jpg',
     content: '想起张雪峰说过的全世界最大的社区天通苑，住了400w人，光是地铁修了三站，去赶早上第一班天通苑的地铁，那才是真正的北京，真的是哭辽',
     comment: 6496,
     like: 8526,
@@ -308,7 +308,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '-_Dimple_',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h11.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h11.jpg',
     content: '今天为了赶地铁在电梯上摔了一跤，手磕破了，马上起来进了地铁结果发现一着急坐反了。某一刻觉得自己长大了，摔倒了不是先难受，想哭觉得丢脸，而是想着快点赶上地铁。大概成年人的无奈就是没时间让我难过一会儿吧。',
     comment: 1237,
     like: 5482,
@@ -316,7 +316,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: 'h奔放小青年',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h12.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h12.jpg',
     content: '关于这部电影看到过一个评论：当年大学毕业以后我和女友各奔东西，曾经一个晚上，偶然又看了这部电影，当至尊宝拥吻紫霞的时候荡气回肠的歌声也让我潸然泪下。。。。。第二天我打起行囊踏上火车往她家赶，如今十年过去，我们已经有了一个可爱的女儿。 我想，这是对一部电影最好的肯定吧',
     comment: 1237,
     like: 5482,
@@ -324,7 +324,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '您的坑友已上线',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h13.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h13.jpg',
     content: '李克勤说他唱了三十多年的歌，当接下面具的时候还很紧张，还很担心自己能不能被大家认出来，然后当《红日》想起来的时候，自己都被感动了。前天看张信哲在央视的开讲啦，坦言面对"过气“一次能够接受，撒贝宁说的很好，这批歌迷也许不会通过刷微博来支持，但是他在这些人的心里比微博上更重要。',
     comment: 1237,
     like: 5482,
@@ -332,7 +332,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '一个人的某泥',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h14.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h14.jpg',
     content: '11年初三，无意中听到这首歌，推荐给同学，他们都说一般般。当我在家外放这首歌时，我奶奶对我说：“这什么歌，这么好听。',
     comment: 1237,
     like: 5482,
@@ -340,7 +340,7 @@ export const momentList: momentListType[] = [
   },
   {
     author: '一个人的某泥',
-    avatar: 'https://atstudy-1253850831.cos.ap-shanghai.myqcloud.com/lab-d3/harmonyOS/music/h15.jpg',
+    avatar: 'https://cdn.atstudy.com/lab-d3/harmonyOS/music/h15.jpg',
     content: '文不黑周树人 武不黑李小龙 音不黑黄家驹 影不黑周星驰',
     comment: 1237,
     like: 5482,

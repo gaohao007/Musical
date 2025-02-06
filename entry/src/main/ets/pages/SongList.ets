@@ -1,5 +1,6 @@
 import { favoriteList } from '../constants'
 import { songItemType } from '../models'
+import AVPlayerClass from '../utils/AVPLayerClass'
 
 @Component
 @Preview
@@ -161,6 +162,9 @@ export default struct SongList {
                     .fillColor(Color.Gray)
                 }
               }
+              .onClick(()=>{
+                AVPlayerClass.singleType(item)
+              })
             })
             ListItem() {
               Row() {

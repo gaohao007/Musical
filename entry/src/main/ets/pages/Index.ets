@@ -9,7 +9,7 @@ import SongList from './SongList'
 import { promptAction } from '@kit.ArkUI'
 import { emitter } from '@kit.BasicServicesKit'
 import { EveConstans } from '../constants/EveConstans'
-import { Log } from '@abner/log/src/main/ets/Log'
+
 import { defaultState, PlayStateType, PlayStateTypeModel } from '../models/playState'
 
 @Entry
@@ -83,7 +83,7 @@ struct Index {
         this.currentName = tabsData[index].name
       })
       .barHeight(60)
-    if (this.playState.playList.length>0 &&  this.currentName==='Mine'){
+    if (this.playState.playList.length>0 &&  this.currentName!=='mine'){
       PlayerNav({playState:this.playState})
         .translate({
           y: -60

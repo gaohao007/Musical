@@ -6,7 +6,7 @@ import Mine from './Mine'
 import Moment from './Moment'
 import Recommend from './Recommend'
 import SongList from './SongList'
-import { promptAction } from '@kit.ArkUI'
+import { promptAction, router } from '@kit.ArkUI'
 import { emitter } from '@kit.BasicServicesKit'
 import { EveConstans } from '../constants/EveConstans'
 
@@ -89,6 +89,7 @@ struct Index {
           y: -60
         }).onClick(() => {
         promptAction.showToast({ message: "音乐播放" })
+        router.pushUrl({url:"pages/Play"})
       })
     }
 

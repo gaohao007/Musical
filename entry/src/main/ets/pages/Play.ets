@@ -1,10 +1,47 @@
 import { songs } from '../constants'
 import { songItemType } from '../models/music'
+import { defaultState, PlayStateType, PlayStateTypeModel } from '../models/playState'
+import { emitter } from '@kit.BasicServicesKit'
+import { EveConstans } from '../constants/EveConstans'
 
 @Entry
 @Component
 struct Play {
   @State panelHeight: string = '0%'
+
+
+  @State
+  playState:PlayStateType =new PlayStateTypeModel(defaultState)
+
+  // 订阅发布的消息
+  aboutToAppear(): void {
+    emitter.on({ eventId:EveConstans.EVENT_ID},(receive:emitter.EventData)=>{
+      const json:string = receive.data?.playStateStr
+      this.playState = JSON.parse(json)
+    } )
+  }
+
+
+  //格式化时间
+  number2time(milliseconds: number) {
+    //计算总秒
+    const totalSeconds = Math.floor(milliseconds / 1000)
+
+    //计算分钟和秒
+    const minutes = Math.floor(totalSeconds / 60)
+    const seconds = totalSeconds % 60
+
+    //格式化分钟和秒为两位
+    const formaterMinutes = String(minutes).padStart(2, '0')
+    const formaterSeconds = String(seconds).padStart(2, '0')
+
+    return `${formaterMinutes}:${formaterSeconds}`
+  }
+
+
+
+
+
 
   @Builder
   deleteButton(index: number) {
@@ -21,7 +58,7 @@ struct Play {
       //播放
       Stack() {
         // 变色背景
-        Image(songs[0].img)
+        Image(this.playState.img)
           .width('100%')
           .height('100%')
           .blur(1000)
@@ -30,7 +67,7 @@ struct Play {
           Stack({ alignContent: Alignment.Top }) {
             Row() {
               Row() {
-                Image(songs[0].img)
+                Image(this.playState.img)
                   .width('70%')
                   .borderRadius(400)
               }
@@ -67,11 +104,11 @@ struct Play {
           // 歌曲信息
           Stack() {
             Column({ space: 8 }) {
-              Text(songs[0].name)
+              Text(this.playState.name)
                 .fontSize(28)
                 .fontWeight(FontWeight.Bold)
                 .fontColor($r('app.color.primary_dark'))
-              Text(songs[0].author)
+              Text(this.playState.author)
                 .fontSize(18)
                 .fontColor($r('app.color.primary_dark'))
             }
@@ -80,11 +117,11 @@ struct Play {
             .zIndex(1)
 
             Column({ space: 8 }) {
-              Text(songs[0].name)
+              Text(this.playState.name)
                 .fontSize(28)
                 .fontWeight(FontWeight.Bold)
                 .fontColor($r('app.color.primary_light'))
-              Text(songs[0].author)
+              Text(this.playState.author)
                 .fontSize(18)
                 .fontColor($r('app.color.primary_light'))
             }
@@ -93,11 +130,11 @@ struct Play {
             .zIndex(2)
 
             Column({ space: 8 }) {
-              Text(songs[0].name)
+              Text(this.playState.name)
                 .fontSize(28)
                 .fontWeight(FontWeight.Bold)
                 .fontColor(Color.White)
-              Text(songs[0].author)
+              Text(this.playState.author)
                 .fontSize(18)
                 .fontColor(Color.White)
             }
@@ -139,7 +176,7 @@ struct Play {
           //播放
           Column() {
             Row() {
-              Text('00:00')
+              Text(this.number2time(this.playState.time))
                 .fontSize(12)
                 .fontColor(Color.White)
 
@@ -153,7 +190,7 @@ struct Play {
                 .selectedColor(Color.White)
                 .trackColor('#ccc5c5c5')
                 .trackThickness(2)
-              Text('00:00')
+              Text(this.number2time(this.playState.duration))
                 .fontSize(12)
                 .fontColor(Color.White)
             }
@@ -161,16 +198,26 @@ struct Play {
             .padding(24)
 
             Row() {
-              Image($r('app.media.ic_auto'))
-                .fillColor(Color.White)
-                .width(30)
+              if (this.playState.playMode ==='auto'){
+                Image($r('app.media.ic_auto'))
+                  .fillColor(Color.White)
+                  .width(30)
+              }else if(this.playState.playMode ==='repeat'){
+                Image($r('app.media.ic_repeat'))
+                  .fillColor(Color.White)
+                  .width(30)
+              }else if (this.playState.playMode ==='random'){
+                Image($r('app.media.ic_random'))
+                  .fillColor(Color.White)
+                  .width(30)
+              }
 
               Image($r("app.media.ic_prev"))
                 .fillColor(Color.White)
                 .width(30)
 
               // 播放按钮
-              Image($r('app.media.ic_play'))
+              Image(this.playState.isPlay? $r('app.media.ic_paused'):$r('app.media.ic_play'))
                 .fillColor(Color.White)
                 .width(50)
               // 下一首
@@ -236,7 +283,7 @@ struct Play {
           })
 
           List() {
-            ForEach(songs, (item: songItemType, index: number) => {
+            ForEach(this.playState.playList, (item: songItemType, index: number) => {
               ListItem() {
                 Row() {
                   Row() {
@@ -249,10 +296,10 @@ struct Play {
                   Column() {
                     Text(item.name)
                       .fontSize(14)
-                      .fontColor(index === 0 ? $r('app.color.primary_light') : '#ffa49a9a')
+                      .fontColor(index === this.playState.playIndex ? $r('app.color.primary_light') : '#ffa49a9a')
                     Text(item.author)
                       .fontSize(12)
-                      .fontColor(index === 0 ? $r('app.color.primary_light') : Color.Gray)
+                      .fontColor(index === this.playState.playIndex ? $r('app.color.primary_light') : Color.Gray)
                   }.alignItems(HorizontalAlign.Start)
                   .layoutWeight(1)
 

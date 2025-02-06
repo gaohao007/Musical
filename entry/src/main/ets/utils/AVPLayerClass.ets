@@ -42,7 +42,8 @@ export  default  class  AVPlayerClass{
           AVPlayerClass.player?.prepare()
           break
         case 'prepared':
-          AVPlayerClass.player?.play()
+          AVPlayerClass.player?.play();
+          AVPlayerClass.isPlay =true;
           break
       }
     })

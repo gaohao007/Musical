@@ -7,6 +7,10 @@ import Moment from './Moment'
 import Recommend from './Recommend'
 import SongList from './SongList'
 import { promptAction } from '@kit.ArkUI'
+import { emitter } from '@kit.BasicServicesKit'
+import { EveConstans } from '../constants/EveConstans'
+import { Log } from '@abner/log/src/main/ets/Log'
+import { defaultState, PlayStateType, PlayStateTypeModel } from '../models/playState'
 
 @Entry
 @Component
@@ -15,6 +19,17 @@ struct Index {
   currentName: string = 'recommend'
   @State
   opacityNum: number = 1
+
+  @State
+  playState:PlayStateType =new PlayStateTypeModel(defaultState)
+
+  // 订阅发布的消息
+  aboutToAppear(): void {
+    emitter.on({ eventId:EveConstans.EVENT_ID},(receive:emitter.EventData)=>{
+      const json:string = receive.data?.playStateStr
+      this.playState = JSON.parse(json)
+    } )
+  }
 
   @Builder
   getTabBar(item: TabClass) {
@@ -68,18 +83,23 @@ struct Index {
         this.currentName = tabsData[index].name
       })
       .barHeight(60)
-
-      PlayerNav()
+    if (this.playState.playList.length>0 &&  this.currentName==='Mine'){
+      PlayerNav({playState:this.playState})
         .translate({
           y: -60
         }).onClick(() => {
         promptAction.showToast({ message: "音乐播放" })
       })
     }
+
+
+    }
     .width('100%')
     .height('100%')
     .backgroundColor("#3c3f41")
     .opacity(this.opacityNum)
+
+
   }
 
   pageTransition() {

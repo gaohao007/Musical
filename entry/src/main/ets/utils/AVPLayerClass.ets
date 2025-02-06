@@ -1,6 +1,9 @@
 import { media } from "@kit.MediaKit";
 import { songItemType } from "../models";
 import { Log } from "@abner/log"
+import { emitter } from "@kit.BasicServicesKit";
+import { PlayStateType } from "../models/playState";
+import { EveConstans } from "../constants/EveConstans";
 
 //播放器工具类
 export  default  class  AVPlayerClass{
@@ -19,6 +22,8 @@ export  default  class  AVPlayerClass{
 
 //   播放序号:
   static playIndex:number =-1;
+//
+  static song:songItemType
 
 
 //   播放器功能
@@ -49,12 +54,27 @@ export  default  class  AVPlayerClass{
   //  监听播放时长
     AVPlayerClass.player.on('timeUpdate',(time:number)=>{
       AVPlayerClass.currentTime =time
+      const obj :PlayStateType={
+        name:AVPlayerClass.song?.name,
+        author:AVPlayerClass.song?.author,
+        img:AVPlayerClass.song?.img,
+        url:AVPlayerClass.song?.url,
+        time:AVPlayerClass.currentTime,
+      duration:AVPlayerClass.durationTime,
+        playList:AVPlayerClass.playList,
+        playIndex:AVPlayerClass.playIndex,
+        isPlay:AVPlayerClass.isPlay,
+        playMode:AVPlayerClass.playMode
+      }
+      AVPlayerClass.updateState(obj)
+
     })
 
   }
 
 //   播放歌曲
   static singleType(song:songItemType){
+    AVPlayerClass.song = song;
     // 判断歌曲是否重复
     const  isReapt=AVPlayerClass.playList.some(item=>item.id===song.id)
     if(isReapt){
@@ -82,6 +102,17 @@ export  default  class  AVPlayerClass{
     AVPlayerClass.currentTime =0;
 
     AVPlayerClass.player!.url = AVPlayerClass.playList[AVPlayerClass.playIndex].url
+  }
+
+//   数据同步
+  static updateState(playState:PlayStateType){
+    emitter.emit({
+      eventId:EveConstans.EVENT_ID
+    },{
+      data:{
+        playStateStr:JSON.stringify(playState)
+      }
+    })
   }
 
 }

@@ -71,6 +71,14 @@ export  default  class  AVPlayerClass{
 
     })
 
+
+  //   监听seek状态:
+    AVPlayerClass.player.on('seekDone',()=>{
+      if (AVPlayerClass.isPlay) {
+        AVPlayerClass.player?.play()
+      }
+    })
+
   }
 
 //   播放歌曲
@@ -80,7 +88,14 @@ export  default  class  AVPlayerClass{
     const  isReapt=AVPlayerClass.playList.some(item=>item.id===song.id)
     if(isReapt){
       if (AVPlayerClass.player?.url === song.url) {
-        AVPlayerClass.changePlay() //重新播放
+        // 判断是否在播放中
+        if (AVPlayerClass.isPlay) {
+          AVPlayerClass.changePlay() //重新播放
+        }else {
+          AVPlayerClass.player.seek(AVPlayerClass.currentTime)
+          AVPlayerClass.isPlay = true
+        }
+
       }else {
         //切歌
        AVPlayerClass.playIndex = AVPlayerClass.playList.findIndex(value=>value.id ===song.id)
@@ -132,4 +147,25 @@ export  default  class  AVPlayerClass{
     }
     AVPlayerClass.updateState(obj)
   }
+
+
+//   切换播放模式
+  static  changeMode(str:"auto"|"repeat"|"random"){
+    AVPlayerClass.playMode = str
+
+    const obj :PlayStateType={
+      name:AVPlayerClass.song?.name,
+      author:AVPlayerClass.song?.author,
+      img:AVPlayerClass.song?.img,
+      url:AVPlayerClass.song?.url,
+      time:AVPlayerClass.currentTime,
+      duration:AVPlayerClass.durationTime,
+      playList:AVPlayerClass.playList,
+      playIndex:AVPlayerClass.playIndex,
+      isPlay:AVPlayerClass.isPlay,
+      playMode:AVPlayerClass.playMode
+    }
+    AVPlayerClass.updateState(obj)
+  }
+
 }

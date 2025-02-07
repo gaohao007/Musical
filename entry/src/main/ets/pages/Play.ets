@@ -26,11 +26,11 @@ struct Play {
   }
   angleChange(){
     if (this.playState.isPlay) {
-      this.angle = 720*(this.playState.time/this.playState.duration)
+      this.angle = 4*720*(this.playState.time/this.playState.duration)
       this.x=2-Math.ceil(4*Math.random())
       this.y=2-Math.ceil(4*Math.random())
     }else{
-      this.angle=0;
+
       this.x=0;
       this.y=0;
     }
@@ -221,14 +221,23 @@ struct Play {
                 Image($r('app.media.ic_auto'))
                   .fillColor(Color.White)
                   .width(30)
+                  .onClick(()=>{
+                    AVPlayerClass.changeMode('repeat')
+                  })
               }else if(this.playState.playMode ==='repeat'){
                 Image($r('app.media.ic_repeat'))
                   .fillColor(Color.White)
                   .width(30)
+                  .onClick(()=>{
+                    AVPlayerClass.changeMode('random')
+                  })
               }else if (this.playState.playMode ==='random'){
                 Image($r('app.media.ic_random'))
                   .fillColor(Color.White)
                   .width(30)
+                  .onClick(()=>{
+                    AVPlayerClass.changeMode('auto')
+                  })
               }
 
               Image($r("app.media.ic_prev"))

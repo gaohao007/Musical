@@ -46,6 +46,7 @@ export  default  class  AVPlayerClass{
           AVPlayerClass.isPlay =true;
           break
         case 'completed':
+
           break
       }
     })
@@ -57,13 +58,14 @@ export  default  class  AVPlayerClass{
   //  监听播放时长
     AVPlayerClass.player.on('timeUpdate',(time:number)=>{
       AVPlayerClass.currentTime =time
+      const sing:songItemType = AVPlayerClass.playList[AVPlayerClass.playIndex]
       const obj :PlayStateType={
-        name:AVPlayerClass.song?.name,
-        author:AVPlayerClass.song?.author,
-        img:AVPlayerClass.song?.img,
-        url:AVPlayerClass.song?.url,
+        name:sing.name,
+        author:sing.author,
+        img:sing.img,
+        url:sing.url,
         time:AVPlayerClass.currentTime,
-      duration:AVPlayerClass.durationTime,
+        duration:AVPlayerClass.durationTime,
         playList:AVPlayerClass.playList,
         playIndex:AVPlayerClass.playIndex,
         isPlay:AVPlayerClass.isPlay,
@@ -85,7 +87,6 @@ export  default  class  AVPlayerClass{
 
 //   播放歌曲
   static singleType(song:songItemType){
-    AVPlayerClass.song = song;
     // 判断歌曲是否重复
     const  isReapt=AVPlayerClass.playList.some(item=>item.id===song.id)
     if(isReapt){
@@ -135,11 +136,14 @@ export  default  class  AVPlayerClass{
   static pause(){
     AVPlayerClass.player?.pause()
     AVPlayerClass.isPlay =false
+
+
+    const sing:songItemType = AVPlayerClass.playList[AVPlayerClass.playIndex]
     const obj :PlayStateType={
-      name:AVPlayerClass.song?.name,
-      author:AVPlayerClass.song?.author,
-      img:AVPlayerClass.song?.img,
-      url:AVPlayerClass.song?.url,
+      name:sing.name,
+      author:sing.author,
+      img:sing.img,
+      url:sing.url,
       time:AVPlayerClass.currentTime,
       duration:AVPlayerClass.durationTime,
       playList:AVPlayerClass.playList,
@@ -155,11 +159,12 @@ export  default  class  AVPlayerClass{
   static  changeMode(str:"auto"|"repeat"|"random"){
     AVPlayerClass.playMode = str
 
+    const sing:songItemType = AVPlayerClass.playList[AVPlayerClass.playIndex]
     const obj :PlayStateType={
-      name:AVPlayerClass.song?.name,
-      author:AVPlayerClass.song?.author,
-      img:AVPlayerClass.song?.img,
-      url:AVPlayerClass.song?.url,
+      name:sing.name,
+      author:sing.author,
+      img:sing.img,
+      url:sing.url,
       time:AVPlayerClass.currentTime,
       duration:AVPlayerClass.durationTime,
       playList:AVPlayerClass.playList,
@@ -209,6 +214,21 @@ export  default  class  AVPlayerClass{
         (AVPlayerClass.playIndex+AVPlayerClass.playList.length) %AVPlayerClass.playList.length
     }
     AVPlayerClass.singleType(AVPlayerClass.playList[AVPlayerClass.playIndex])
+
   }
+
+  static  removeSomeSong(index:number){
+    if (index === AVPlayerClass.playIndex) {
+      //删除正在播放的歌曲
+
+    }else{
+      // 删除前面的歌曲
+      if (AVPlayerClass.playIndex > index ) {
+        AVPlayerClass.playIndex--
+      }
+      AVPlayerClass.playList.splice(index,1)
+    }
+  }
+
 
 }

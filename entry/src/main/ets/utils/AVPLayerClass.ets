@@ -45,6 +45,8 @@ export  default  class  AVPlayerClass{
           AVPlayerClass.player?.play();
           AVPlayerClass.isPlay =true;
           break
+        case 'completed':
+          break
       }
     })
 
@@ -166,6 +168,47 @@ export  default  class  AVPlayerClass{
       playMode:AVPlayerClass.playMode
     }
     AVPlayerClass.updateState(obj)
+  }
+
+  static  nextSong(){
+    //没有歌
+    if (AVPlayerClass.playList.length ===0) {
+       return
+    }
+    if (AVPlayerClass.playList.length>1 && AVPlayerClass.playMode==='random') {
+      let index =0;
+      do {
+        index =Math.floor(Math.random()*AVPlayerClass.playList.length)
+      }while (index === AVPlayerClass.playIndex)
+      AVPlayerClass.playIndex =index
+
+    }else {
+      AVPlayerClass.playIndex++
+      AVPlayerClass.playIndex =
+        (AVPlayerClass.playIndex+AVPlayerClass.playList.length) %AVPlayerClass.playList.length
+    }
+    AVPlayerClass.singleType(AVPlayerClass.playList[AVPlayerClass.playIndex])
+  }
+
+
+  static  preSong(){
+    //没有歌
+    if (AVPlayerClass.playList.length ===0) {
+      return
+    }
+    if (AVPlayerClass.playList.length>1 && AVPlayerClass.playMode==='random') {
+      let index =0;
+      do {
+        index =Math.floor(Math.random()*AVPlayerClass.playList.length)
+      }while (index === AVPlayerClass.playIndex)
+      AVPlayerClass.playIndex =index
+
+    }else {
+      AVPlayerClass.playIndex--
+      AVPlayerClass.playIndex =
+        (AVPlayerClass.playIndex+AVPlayerClass.playList.length) %AVPlayerClass.playList.length
+    }
+    AVPlayerClass.singleType(AVPlayerClass.playList[AVPlayerClass.playIndex])
   }
 
 }

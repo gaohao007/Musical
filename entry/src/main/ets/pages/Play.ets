@@ -3,15 +3,19 @@ import { songItemType } from '../models/music'
 import { defaultState, PlayStateType, PlayStateTypeModel } from '../models/playState'
 import { emitter } from '@kit.BasicServicesKit'
 import { EveConstans } from '../constants/EveConstans'
+import AVPlayerClass from '../utils/AVPLayerClass'
 
 @Entry
 @Component
 struct Play {
   @State panelHeight: string = '0%'
 
-
+@Watch('angleChange')
   @State
   playState:PlayStateType =new PlayStateTypeModel(defaultState)
+  @State angle:number=0;
+  @State x:number=0
+  @State y:number=0
 
   // 订阅发布的消息
   aboutToAppear(): void {
@@ -19,6 +23,17 @@ struct Play {
       const json:string = receive.data?.playStateStr
       this.playState = JSON.parse(json)
     } )
+  }
+  angleChange(){
+    if (this.playState.isPlay) {
+      this.angle = 720*(this.playState.time/this.playState.duration)
+      this.x=2-Math.ceil(4*Math.random())
+      this.y=2-Math.ceil(4*Math.random())
+    }else{
+      this.angle=0;
+      this.x=0;
+      this.y=0;
+    }
   }
 
 
@@ -86,13 +101,14 @@ struct Play {
             .aspectRatio(1)
             .justifyContent(FlexAlign.Center)
             .padding(24)
+            .rotate({angle:this.angle})
 
             // 唱针
             Image($r('app.media.ic_stylus'))
               .width(200)
               .aspectRatio(1)
               .rotate({
-                angle: -55,
+                angle:this.playState.isPlay?-42:-55,
                 centerX: 100,
                 centerY: 30
               })
@@ -115,6 +131,7 @@ struct Play {
             .layoutWeight(1)
             .justifyContent(FlexAlign.Center)
             .zIndex(1)
+            .translate({x:this.x,y:this.y})
 
             Column({ space: 8 }) {
               Text(this.playState.name)
@@ -128,6 +145,8 @@ struct Play {
             .layoutWeight(1)
             .justifyContent(FlexAlign.Center)
             .zIndex(2)
+            .translate({x:this.x,y:this.y})
+
 
             Column({ space: 8 }) {
               Text(this.playState.name)
@@ -181,9 +200,9 @@ struct Play {
                 .fontColor(Color.White)
 
               Slider({
-                value: 0,
+                value: this.playState.time,
                 min: 0,
-                max: 0
+                max: this.playState.duration
               })
                 .layoutWeight(1)
                 .blockColor(Color.White)
@@ -220,6 +239,13 @@ struct Play {
               Image(this.playState.isPlay? $r('app.media.ic_paused'):$r('app.media.ic_play'))
                 .fillColor(Color.White)
                 .width(50)
+                .onClick(()=>{
+                  if (this.playState.isPlay) {
+                    AVPlayerClass.pause()
+                  }else{
+                    AVPlayerClass.singleType(AVPlayerClass.playList[AVPlayerClass.playIndex])
+                  }
+                })
               // 下一首
               Image($r('app.media.ic_next'))
                 .fillColor(Color.White)

@@ -115,5 +115,21 @@ export  default  class  AVPlayerClass{
       }
     })
   }
-
+  static pause(){
+    AVPlayerClass.player?.pause()
+    AVPlayerClass.isPlay =false
+    const obj :PlayStateType={
+      name:AVPlayerClass.song?.name,
+      author:AVPlayerClass.song?.author,
+      img:AVPlayerClass.song?.img,
+      url:AVPlayerClass.song?.url,
+      time:AVPlayerClass.currentTime,
+      duration:AVPlayerClass.durationTime,
+      playList:AVPlayerClass.playList,
+      playIndex:AVPlayerClass.playIndex,
+      isPlay:AVPlayerClass.isPlay,
+      playMode:AVPlayerClass.playMode
+    }
+    AVPlayerClass.updateState(obj)
+  }
 }

@@ -220,6 +220,9 @@ struct Play {
                 .selectedColor(Color.White)
                 .trackColor('#ccc5c5c5')
                 .trackThickness(2)
+                .onChange((value: number) => {
+                  AVPlayerClass.player?.seek(value)
+                })
               Text(this.number2time(this.playState.duration))
                 .fontSize(12)
                 .fontColor(Color.White)

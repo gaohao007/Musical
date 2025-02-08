@@ -4,6 +4,8 @@ import { defaultState, PlayStateType, PlayStateTypeModel } from '../models/playS
 import { emitter } from '@kit.BasicServicesKit'
 import { EveConstans } from '../constants/EveConstans'
 import AVPlayerClass from '../utils/AVPLayerClass'
+import { preferences } from '@kit.ArkData'
+import { PrefernceClass } from '../utils/PrefernceClass'
 
 @Entry
 @Component
@@ -18,7 +20,13 @@ struct Play {
   @State y:number=0
 
   // 订阅发布的消息
-  aboutToAppear(): void {
+  async aboutToAppear() {
+    // 首选项读取数据
+    const preferences:PrefernceClass = new PrefernceClass(AVPlayerClass.context!)
+    this.playState = await preferences.getPlayState()
+
+
+
     emitter.on({ eventId:EveConstans.EVENT_ID},(receive:emitter.EventData)=>{
       const json:string = receive.data?.playStateStr
       this.playState = JSON.parse(json)
@@ -66,6 +74,9 @@ struct Play {
       .width(80)
       .height('100%')
       .type(ButtonType.Normal)
+      .onClick(()=>{
+        AVPlayerClass.removeSomeSong(index)
+      })
   }
 
   build() {
@@ -303,7 +314,8 @@ struct Play {
             .aspectRatio(1)
             .justifyContent(FlexAlign.Center)
 
-            Text(`播放列表 (${songs.length})`)
+
+            Text(`播放列表 (${AVPlayerClass.playList.length})`)
               .fontColor(Color.White)
               .fontSize(14)
               .layoutWeight(1)

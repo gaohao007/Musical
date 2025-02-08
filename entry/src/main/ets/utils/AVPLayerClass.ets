@@ -2,8 +2,11 @@ import { media } from "@kit.MediaKit";
 import { songItemType } from "../models";
 import { Log } from "@abner/log"
 import { emitter } from "@kit.BasicServicesKit";
-import { PlayStateType } from "../models/playState";
+import { defaultState, PlayStateType } from "../models/playState";
 import { EveConstans } from "../constants/EveConstans";
+import { Context } from "@kit.AbilityKit";
+import { PrefernceClass } from "./PrefernceClass";
+import { router } from "@kit.ArkUI";
 
 //播放器工具类
 export  default  class  AVPlayerClass{
@@ -22,16 +25,36 @@ export  default  class  AVPlayerClass{
 
 //   播放序号:
   static playIndex:number =-1;
-//
-  static song:songItemType
+//上下文对象
+  static  context:Context |null = null;
+
 
 
 //   播放器功能
 
 //   初始化播放器
   static  async init(){
-    // 创建播放器
-    AVPlayerClass.player = await  media.createAVPlayer()
+    if (AVPlayerClass.player ===null){
+      // 创建播放器
+      AVPlayerClass.player = await  media.createAVPlayer()
+
+    //   断点续播,将之前的状态进行恢复
+      //从首选项读取之前的数据
+      const pre = new PrefernceClass(AVPlayerClass.context!)
+      const  playState = await pre.getPlayState()
+
+      //重新设置
+      playState.isPlay = false;
+      AVPlayerClass.currentTime = playState.time;
+      AVPlayerClass.durationTime = playState.duration;
+      AVPlayerClass.playIndex = playState.playIndex;
+      AVPlayerClass.playList = playState.playList;
+      AVPlayerClass.playMode = playState.playMode
+      AVPlayerClass.isPlay = playState.isPlay
+      AVPlayerClass.updateState(playState)
+
+    }
+
 
 
 
@@ -44,9 +67,22 @@ export  default  class  AVPlayerClass{
         case 'prepared':
           AVPlayerClass.player?.play();
           AVPlayerClass.isPlay =true;
+          AVPlayerClass.player?.seek(AVPlayerClass.currentTime)
           break
-        case 'completed':
+        case 'completed': //实现自动切歌的过程
+          if (AVPlayerClass.playList.length>1 && AVPlayerClass.playMode =='random') {
+            let index =0;
+            do {
+              index =Math.floor(Math.random()*AVPlayerClass.playList.length)
+            }while (index === AVPlayerClass.playIndex)
+            AVPlayerClass.playIndex =index
 
+          }else if(AVPlayerClass.playMode == 'auto') {
+            AVPlayerClass.playIndex++
+            AVPlayerClass.playIndex =
+              (AVPlayerClass.playIndex+AVPlayerClass.playList.length) %AVPlayerClass.playList.length
+          }
+          AVPlayerClass.singleType(AVPlayerClass.playList[AVPlayerClass.playIndex])
           break
       }
     })
@@ -57,21 +93,29 @@ export  default  class  AVPlayerClass{
     })
   //  监听播放时长
     AVPlayerClass.player.on('timeUpdate',(time:number)=>{
-      AVPlayerClass.currentTime =time
-      const sing:songItemType = AVPlayerClass.playList[AVPlayerClass.playIndex]
-      const obj :PlayStateType={
-        name:sing.name,
-        author:sing.author,
-        img:sing.img,
-        url:sing.url,
-        time:AVPlayerClass.currentTime,
-        duration:AVPlayerClass.durationTime,
-        playList:AVPlayerClass.playList,
-        playIndex:AVPlayerClass.playIndex,
-        isPlay:AVPlayerClass.isPlay,
-        playMode:AVPlayerClass.playMode
+
+      //
+      if (time !==0 && time !== AVPlayerClass.currentTime) {
+        AVPlayerClass.currentTime =time
+        const sing:songItemType = AVPlayerClass.playList[AVPlayerClass.playIndex]
+        const obj :PlayStateType={
+          name:sing.name,
+          author:sing.author,
+          img:sing.img,
+          url:sing.url,
+          time:AVPlayerClass.currentTime,
+          duration:AVPlayerClass.durationTime,
+          playList:AVPlayerClass.playList,
+          playIndex:AVPlayerClass.playIndex,
+          isPlay:AVPlayerClass.isPlay,
+          playMode:AVPlayerClass.playMode
+        }
+        AVPlayerClass.updateState(obj)
+
       }
-      AVPlayerClass.updateState(obj)
+
+
+
 
     })
 
@@ -90,8 +134,9 @@ export  default  class  AVPlayerClass{
     // 判断歌曲是否重复
     const  isReapt=AVPlayerClass.playList.some(item=>item.id===song.id)
     if(isReapt){
+      // 判断是否在播放中
       if (AVPlayerClass.player?.url === song.url) {
-        // 判断是否在播放中
+
         if (AVPlayerClass.isPlay) {
           AVPlayerClass.changePlay() //重新播放
         }else {
@@ -100,9 +145,16 @@ export  default  class  AVPlayerClass{
         }
 
       }else {
+        // 需要考虑断点续播的情况:
+        if (AVPlayerClass.player?.url === "") {
+          AVPlayerClass.player.url = song.url
+        }else {
+          AVPlayerClass.playIndex = AVPlayerClass.playList.findIndex(value=>value.id ===song.id)
+          AVPlayerClass.changePlay()
+        }
+
         //切歌
-       AVPlayerClass.playIndex = AVPlayerClass.playList.findIndex(value=>value.id ===song.id)
-      AVPlayerClass.changePlay()
+
       }
     }else {
       AVPlayerClass.playList.unshift(song)
@@ -114,6 +166,7 @@ export  default  class  AVPlayerClass{
 
   }
 
+
   static async  changePlay(){
     //重置播放器,处于闲置状态
     await AVPlayerClass.player?.reset()
@@ -122,6 +175,7 @@ export  default  class  AVPlayerClass{
 
     AVPlayerClass.player!.url = AVPlayerClass.playList[AVPlayerClass.playIndex].url
   }
+
 
 //   数据同步
   static updateState(playState:PlayStateType){
@@ -132,6 +186,11 @@ export  default  class  AVPlayerClass{
         playStateStr:JSON.stringify(playState)
       }
     })
+
+  //   更新首选项:
+    const preference = new PrefernceClass(AVPlayerClass.context!)
+    preference.setPlayState(playState)
+
   }
   static pause(){
     AVPlayerClass.player?.pause()
@@ -175,12 +234,14 @@ export  default  class  AVPlayerClass{
     AVPlayerClass.updateState(obj)
   }
 
+
+
   static  nextSong(){
     //没有歌
     if (AVPlayerClass.playList.length ===0) {
        return
     }
-    if (AVPlayerClass.playList.length>1 && AVPlayerClass.playMode==='random') {
+    if (AVPlayerClass.playList.length>1 && AVPlayerClass.playMode =='random') {
       let index =0;
       do {
         index =Math.floor(Math.random()*AVPlayerClass.playList.length)
@@ -221,12 +282,46 @@ export  default  class  AVPlayerClass{
     if (index === AVPlayerClass.playIndex) {
       //删除正在播放的歌曲
 
+      // 歌曲不止一首
+      if (AVPlayerClass.playList.length>1) {
+        AVPlayerClass.playList.splice(index,1)
+        AVPlayerClass.playIndex =
+          (AVPlayerClass.playIndex+AVPlayerClass.playList.length)% AVPlayerClass.playList.length
+      AVPlayerClass.singleType(AVPlayerClass.playList[AVPlayerClass.playIndex])
+      }else{
+        //删完没有歌
+        AVPlayerClass.player?.reset();
+        AVPlayerClass.playList.splice(index,1)
+        AVPlayerClass.isPlay =false;
+        AVPlayerClass.currentTime=0;
+        AVPlayerClass.durationTime =0;
+        AVPlayerClass.updateState(defaultState)
+        router.back()
+      }
+
+
     }else{
       // 删除前面的歌曲
       if (AVPlayerClass.playIndex > index ) {
         AVPlayerClass.playIndex--
       }
       AVPlayerClass.playList.splice(index,1)
+
+      const sing:songItemType = AVPlayerClass.playList[AVPlayerClass.playIndex]
+      const obj :PlayStateType={
+        name:sing.name,
+        author:sing.author,
+        img:sing.img,
+        url:sing.url,
+        time:AVPlayerClass.currentTime,
+        duration:AVPlayerClass.durationTime,
+        playList:AVPlayerClass.playList,
+        playIndex:AVPlayerClass.playIndex,
+        isPlay:AVPlayerClass.isPlay,
+        playMode:AVPlayerClass.playMode
+      }
+      AVPlayerClass.updateState(obj)
+
     }
   }
 

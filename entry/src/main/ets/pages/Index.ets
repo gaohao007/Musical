@@ -9,8 +9,9 @@ import SongList from './SongList'
 import { promptAction, router } from '@kit.ArkUI'
 import { emitter } from '@kit.BasicServicesKit'
 import { EveConstans } from '../constants/EveConstans'
-
 import { defaultState, PlayStateType, PlayStateTypeModel } from '../models/playState'
+import { PrefernceClass } from '../utils/PrefernceClass'
+import AVPlayerClass from '../utils/AVPLayerClass'
 
 @Entry
 @Component
@@ -24,7 +25,11 @@ struct Index {
   playState:PlayStateType =new PlayStateTypeModel(defaultState)
 
   // 订阅发布的消息
-  aboutToAppear(): void {
+  async aboutToAppear() {
+    //1.从首选项中读取数据
+    const preferences: PrefernceClass = new PrefernceClass(AVPlayerClass.context!)
+    this.playState = await preferences.getPlayState()
+
     emitter.on({ eventId:EveConstans.EVENT_ID},(receive:emitter.EventData)=>{
       const json:string = receive.data?.playStateStr
       this.playState = JSON.parse(json)
